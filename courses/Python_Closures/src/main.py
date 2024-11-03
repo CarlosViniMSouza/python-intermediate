@@ -99,6 +99,7 @@ print(appender("Third item"))
 
 ## Creating Factory Functions ##
 
+"""
 def make_calculator(root_degree, preicion=2):
     def root_calculator(number):
         return round(pow(number, 1 / root_degree), preicion)
@@ -107,3 +108,156 @@ def make_calculator(root_degree, preicion=2):
 
 square_root = make_calculator(2, 2)
 print(f"The root of 50 is {square_root(50)}")
+"""
+
+## Building Stateful Functions ## 
+
+"""
+def cumulative_average():
+    data = []
+
+    def average(value):
+        data.append(value)
+        return sum(data) / len(data)
+
+    return average
+
+stream_average = cumulative_average()
+
+result = stream_average(10)
+result = stream_average(12)
+result = stream_average(6)
+
+print(f"Stream Average Total: {result:.2f}") 
+# output: Stream Average Total: 9.33
+"""
+
+## Providing Callback Functions ##
+
+"""
+import tkinter as tk
+
+app = tk.Tk()
+app.title("GUI App")
+app.geometry("320x240")
+
+label = tk.Label(
+    app,
+    font=("Helvetica", 16, "bold"),
+)
+label.pack()
+
+def callback(text):
+    def closure():
+        label.config(text=text)
+
+    return closure
+
+button = tk.Button(
+    app,
+    text="Greet",
+    command=callback("Hello, World!"),
+)
+
+button.pack()
+app.mainloop()
+"""
+
+## Writing Decorators With Closures ##
+
+"""
+def decorator(function):
+    def closure():
+        print("\nDoing something BEFORE calling the function.")
+        function()
+        print("\nDoing something AFTER calling the function.")
+    
+    return closure
+
+@decorator
+def greet():
+    print("Hi, Pythonista!")
+
+greet()
+"""
+
+## Implementing Memoization With Closures ##
+
+"""
+from time import sleep
+from timeit import timeit
+
+def memoize(function):
+    cache = {}
+
+    def closure(number):
+        if number not in cache:
+            cache[number] = function(number)
+
+        return cache[number]
+    
+    return closure
+
+@memoize
+def slow_operation(number):
+    sleep(0.5)
+
+print(timeit(
+    "[slow_operation(number) for number in [2, 3, 4, 2, 3, 4]]",
+    globals=globals(),
+    number=1,
+))
+"""
+
+## Achieving Encapsulation With Closures ##
+
+"""
+class Stack:
+    def __init__(self):
+        self._items = []
+
+    def push(self, item):
+        self._items.append(item)
+
+    def pop(self):
+        return self._items.pop()
+    
+stack = Stack()
+stack.push(1)
+stack.push(2)
+stack.push(4)
+stack.pop()
+stack.push(8)
+
+print(stack._items)
+"""
+
+# Again, a closure provides a trick for achieving a stricter data encapsulation.
+
+def Stack():
+    _items = []
+
+    def push(item):
+        _items.append(item)
+
+    def pop():
+        return _items.pop()
+
+    def closure():
+        pass
+
+    closure.push = push
+    closure.pop = pop
+
+    return closure
+
+stack = Stack()
+stack.push(1)
+stack.push(2)
+stack.push(4)
+stack.pop()
+stack.push(8)
+
+print(stack.push.__closure__[0].cell_contents)
+
+## Exploring Alternatives to Closures ##
