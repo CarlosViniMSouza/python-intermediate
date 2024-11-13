@@ -1,5 +1,5 @@
 git add .
-git commit -m "Paused in: Exploring Alternatives to Closures"
+git commit -m "Finished: Python Closures"
 git push -u origin main
 git status
 
