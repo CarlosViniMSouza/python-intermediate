@@ -1,6 +1,6 @@
 git add .
-git commit -m "Started: Python Properties"
+git commit -m "Stoped in: Providing Read-Only Attributes"
 git push -u origin main
 git status
 
-# link: https://realpython.com/python-property/?utm_source=realpython&utm_medium=web&utm_campaign=related-post&utm_content=python-closure#the-pythonic-approach
+# link: https://realpython.com/python-property/?utm_source=realpython&utm_medium=web&utm_campaign=related-post&utm_content=python-closure#providing-read-only-attributes
