@@ -101,6 +101,7 @@ print(circle.radius) # ERROR
 
 ## Using property() as a Decorator ##
 
+"""
 class Circle:
     def __init__(self, radius):
         self._radius = radius
@@ -126,11 +127,12 @@ print(circle.radius) # output: 36.9
 
 #del circle.radius
 #print(circle.radius) # ERROR
+"""
 
 """
 ## Deciding When to Use Properties ##
 
-In general, you should avoid using properties for attributes that don’t require extra functionality or processing. If you do use properties this way, then you'll make your code:
+In general, you should avoid using properties for attributes that don't require extra functionality or processing. If you do use properties this way, then you'll make your code:
 
 1. Unnecessarily verbose
 2. Confusing to other developers
